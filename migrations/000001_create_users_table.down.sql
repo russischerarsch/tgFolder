@@ -1,7 +1,8 @@
 CREATE TABLE users (
     id BIGSERIAL PRIMARY KEY,
     telegram_id BIGINT NOT NULL UNIQUE,
-    name VARCHAR(100) NOT NULL
+    name VARCHAR(100) NOT NULL,
+    created_ad TIMESTAMPTZ NOT NULL
 );
 
 CREATE TABLE items (

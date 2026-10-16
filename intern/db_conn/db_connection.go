@@ -7,7 +7,7 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
-func SetupConnection(ctx context.Context, connStr string) (*pgxpool.Pool, error) {
+func NewConnection(ctx context.Context, connStr string) (*pgxpool.Pool, error) {
 	pool, err := pgxpool.New(ctx, connStr)
 	if err != nil {
 		time.Sleep(1 * time.Second)
