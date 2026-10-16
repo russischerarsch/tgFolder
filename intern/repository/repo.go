@@ -2,9 +2,11 @@ package repository
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"tgFolder/intern/domain"
 
+	"github.com/jackc/pgx/v5/pgconn"
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
@@ -22,7 +24,12 @@ func (r *repoDB) CreateUser(ctx context.Context, u domain.User) error {
 	VALUES($1, $2, $3)
 	`
 	if _, err := r.db.Exec(ctx, query, u.Telegram_id, u.Name, u.CreatedAt); err != nil {
+		var pgErr *pgconn.PgError
+		if errors.As(err, &pgErr) && pgErr.Code == "23505" {
+			return domain.ErrUserExists
+		}
 		return fmt.Errorf("failed to send query, %w", err)
 	}
+
 	return nil
 }

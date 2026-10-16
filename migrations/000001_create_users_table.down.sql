@@ -1,14 +1,2 @@
-CREATE TABLE users (
-    id BIGSERIAL PRIMARY KEY,
-    telegram_id BIGINT NOT NULL UNIQUE,
-    name VARCHAR(100) NOT NULL,
-    created_ad TIMESTAMPTZ NOT NULL
-);
-
-CREATE TABLE items (
-    id BIGSERIAL PRIMARY KEY,
-    user_id BIGINT NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
-    message_id BIGINT NOT NULL UNIQUE,
-    chat_id BIGINT NOT NULL UNIQUE,
-    folder_name TEXT NOT NULL 
-)
+DROP TABLE items;
+DROP TABLE users;

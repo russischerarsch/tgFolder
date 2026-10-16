@@ -18,8 +18,7 @@ func NewService(repo RepoInterface) *Service {
 	return &Service{repo: repo}
 }
 
-func (s *Service) CreateUser(telegramID int64, name string) error {
-	ctx := context.Background()
+func (s *Service) CreateUser(ctx context.Context, telegramID int64, name string) error {
 	if len(name) > 100 {
 		return domain.ErrTooLongName
 	}

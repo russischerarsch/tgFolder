@@ -2,7 +2,6 @@ package dbconn
 
 import (
 	"context"
-	"time"
 
 	"github.com/jackc/pgx/v5/pgxpool"
 )
@@ -10,7 +9,7 @@ import (
 func NewConnection(ctx context.Context, connStr string) (*pgxpool.Pool, error) {
 	pool, err := pgxpool.New(ctx, connStr)
 	if err != nil {
-		time.Sleep(1 * time.Second)
+		return nil, err
 	}
 	if err := pool.Ping(ctx); err != nil {
 		pool.Close()
